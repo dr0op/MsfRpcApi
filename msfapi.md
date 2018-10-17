@@ -796,4 +796,4 @@ read meterpreter {b'error': True, b'error_class': b'ArgumentError', b'error_stri
 
 # 总结
 
-该文档由浅入深地描述了MSF API调用开发的方式及常见问题。并且由于每个人的环境不同，相同的代码在不同的环境中可能无法运行，需自行解决环境及依赖问题。封装方法精力允许的情况下推荐第二种封装方式。更为专业及具有可扩展性。
+该文档由浅入深地描述了MSF API调用开发的方式及常见问题。并且由于每个人的环境不同，相同的代码在不同的环境中可能无法运行，需自行解决环境及依赖问题。封装方法精力允许的情况下推荐第二种封装方式。更为专业及具有可扩展性。已将部分代码push至gitlab：`http://gitlab.vackbot.com/blank7/MsfRpcAPI`。
