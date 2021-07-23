@@ -636,7 +636,7 @@ class Client(object):
         :return:
         """
         str(ses_id)
-        res = self.send_command(["session.meterperter_write",self.token,ses_id,data])
+        res = self.send_command(["session.meterpreter_write",self.token,ses_id,data])
         return res
 
     def read_meterpreter(self,ses_id):
@@ -646,7 +646,7 @@ class Client(object):
         :return:
         """
         str(ses_id)
-        res = self.send_command(["session.meterperter_read",self.token,ses_id])
+        res = self.send_command(["session.meterpreter_read",self.token,ses_id])
         return res
 
     def run_module(self,_type,name,HOST,PORT,payload=False):
@@ -761,7 +761,9 @@ def convert(data):
 
 ```
 
-#### 2. meterpreter无法获取session问题
+#### 2. ~~meterpreter无法获取session问题~~
+
+> demo代码中meterpreter单词拼写错误导致
 
 使用`msfvenom`生成一个木马并在目标执行。在msf服务端使用MSF RPC进行监听。使用`session.list`成功获取session列表。返回结果如下：
 
