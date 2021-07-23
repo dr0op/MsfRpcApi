@@ -636,7 +636,7 @@ class Client(object):
         :return:
         """
         str(ses_id)
-        res = self.send_command(["session.meterperter_write",self.token,ses_id,data])
+        res = self.send_command(["session.meterpreter_write",self.token,ses_id,data])
         return res
 
     def read_meterpreter(self,ses_id):
@@ -646,7 +646,7 @@ class Client(object):
         :return:
         """
         str(ses_id)
-        res = self.send_command(["session.meterperter_read",self.token,ses_id])
+        res = self.send_command(["session.meterpreter_read",self.token,ses_id])
         return res
 
     def run_module(self,_type,name,HOST,PORT,payload=False):
@@ -761,17 +761,19 @@ def convert(data):
 
 ```
 
-#### 2. meterpreter无法获取session问题
+#### 2. ~~meterpreter无法获取session问题~~
 
-使用`msfvenom`生成一个木马并在目标执行。在msf服务端使用MSF RPC进行监听。使用`session.list`成功获取session列表。返回结果如下：
+> demo代码中meterpreter单词拼写错误导致
+
+~~使用`msfvenom`生成一个木马并在目标执行。在msf服务端使用MSF RPC进行监听。使用`session.list`成功获取session列表。返回结果如下：~~
 
 ```json
 {14: {b'type': b'meterpreter', b'tunnel_local': b'10.10.11.180:3355', b'tunnel_peer': b'10.10.11.180:55656', b'via_exploit': b'exploit/multi/handler', b'via_payload': b'payload/windows/meterpreter/reverse_tcp', b'desc': b'Meterpreter', b'info': b'LAPTOP-0IG64IBE\\dr0op @ LAPTOP-0IG64IBE', b'workspace': b'false', b'session_host': b'10.10.11.180', b'session_port': 55656, b'target_host': b'10.10.11.180', b'username': b'dr0op', b'uuid': b'j3oe1mtk', b'exploit_uuid': b'nxyfbzx4', b'routes': b'', b'arch': b'x86', b'platform': b'windows'}}
 ```
 
-session ID为14。
+~~session ID为14。~~
 
-成功获取session列表后，就可以向session读写meterpreter命令。
+~~成功获取session列表后，就可以向session读写meterpreter命令。~~
 
 ```python
 c.write_meterpreter(14,'getuid\n')
@@ -781,7 +783,7 @@ c.write_meterpreter(14,'getuid\n')
 c.read_meterpreter(14)
 ```
 
-然而，MSF RPC端返回如下：
+~~然而，MSF RPC端返回如下：~~
 
 ```json
 write meterpreter {b'error': True, b'error_class': b'ArgumentError', b'error_string': b'Unknown API Call: \'"rpc_meterperter_write"\'', b'error_backtrace': [b"lib/msf/core/rpc/v10/service.rb:143:in `process'", b"lib/msf/core/rpc/v10/service.rb:91:in `on_request_uri'", b"lib/msf/core/rpc/v10/service.rb:72:in `block in start'", b"lib/rex/proto/http/handler/proc.rb:38:in `on_request'", b"lib/rex/proto/http/server.rb:368:in `dispatch_request'", b"lib/rex/proto/http/server.rb:302:in `on_client_data'", b"lib/rex/proto/http/server.rb:161:in `block in start'", b"lib/rex/io/stream_server.rb:48:in `on_client_data'", b"lib/rex/io/stream_server.rb:199:in `block in monitor_clients'", b"lib/rex/io/stream_server.rb:197:in `each'", b"lib/rex/io/stream_server.rb:197:in `monitor_clients'", b"lib/rex/io/stream_server.rb:73:in `block in start'", b"lib/rex/thread_factory.rb:22:in `block in spawn'", b"lib/msf/core/thread_manager.rb:100:in `block in spawn'"], b'error_message': b'Unknown API Call: \'"rpc_meterperter_write"\''}
@@ -792,7 +794,7 @@ write meterpreter {b'error': True, b'error_class': b'ArgumentError', b'error_str
 read meterpreter {b'error': True, b'error_class': b'ArgumentError', b'error_string': b'Unknown API Call: \'"rpc_meterperter_read"\'', b'error_backtrace': [b"lib/msf/core/rpc/v10/service.rb:143:in `process'", b"lib/msf/core/rpc/v10/service.rb:91:in `on_request_uri'", b"lib/msf/core/rpc/v10/service.rb:72:in `block in start'", b"lib/rex/proto/http/handler/proc.rb:38:in `on_request'", b"lib/rex/proto/http/server.rb:368:in `dispatch_request'", b"lib/rex/proto/http/server.rb:302:in `on_client_data'", b"lib/rex/proto/http/server.rb:161:in `block in start'", b"lib/rex/io/stream_server.rb:48:in `on_client_data'", b"lib/rex/io/stream_server.rb:199:in `block in monitor_clients'", b"lib/rex/io/stream_server.rb:197:in `each'", b"lib/rex/io/stream_server.rb:197:in `monitor_clients'", b"lib/rex/io/stream_server.rb:73:in `block in start'", b"lib/rex/thread_factory.rb:22:in `block in spawn'", b"lib/msf/core/thread_manager.rb:100:in `block in spawn'"], b'error_message': b'Unknown API Call: \'"rpc_meterperter_read"\''}
 ```
 
-暂未找到解决方案。
+~~暂未找到解决方案。~~
 
 # 总结
 
